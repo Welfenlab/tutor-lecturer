@@ -89,4 +89,33 @@ describe("Student REST API", function(){
     });
   });
 
+  it("should be possible to create a new tutor", function(done){
+    doSimpleRequest("PUT", "/tutors", {tutor:{name:"NewTutor", pw:"blubb"}},
+      function(err, res, body){
+        (err == null).should.be.true;
+        res.statusCode.should.equal(204);
+        done();
+    });
+  });
+
+  it("should list all groups", function(done){
+    doRequest("GET", "/groups",
+      function(err, res, body){
+        (err == null).should.be.true;
+        res.statusCode.should.equal(200);
+        body.should.have.length(2);
+        done();
+    });
+  });
+
+  it("should list all users", function(done){
+    doRequest("GET", "/users",
+      function(err, res, body){
+        (err == null).should.be.true;
+        res.statusCode.should.equal(200);
+        body.should.have.length(3);
+        done();
+    });
+  });
+
 });
