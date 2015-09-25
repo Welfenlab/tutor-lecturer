@@ -1,5 +1,6 @@
 
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt-then');
+var _ = require('lodash');
 
 module.exports = function(DB){
   return [
@@ -9,17 +10,11 @@ module.exports = function(DB){
 
     { path: '/api/tutors', dataCall: DB.Manage.listTutors, apiMethod: "get"},
     { path: '/api/tutors', dataCall: function(tutor){
-      return new Promise(function(resolve, reject){
-        // first generate some salt and create a password hash ;)
-        // the salt is stored in the hash
-        bcrypt.hash(tutor.pw, 10, function(err,hash){
-          if(err){
-            reject(err)
-          } else {
-            DB.Manage.storeTutor(tutor.name, hash).then(resolve);
-          }
-        });
-      });
+      // first generate some salt and create a password hash ;)
+      // the salt is stored in the hash
+      return bcrypt.hash(tutor.pw, 10).then(
+        _.partial(DB.Manage.storeTutor, tutor.name)
+      );
     }, apiMethod: "putByBodyParam", param: "tutor"},
 
     { path: '/api/groups', dataCall: DB.Manage.listGroups, apiMethod: "get" },
