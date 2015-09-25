@@ -67,8 +67,8 @@ describe("Student REST API", function(){
       });
   });
 
-  it("returns a detailed list that should contain tasks", function(done){
-    doRequest("GET", "/exercises/detailed/ee256059-9d92-4774-9db2-456378e04586",
+  it("a single exercise should contain tasks", function(done){
+    doRequest("GET", "/exercises/ee256059-9d92-4774-9db2-456378e04586",
       function(err, res, body){
         (err == null).should.be.true;
         body.tasks.forEach(function(t){

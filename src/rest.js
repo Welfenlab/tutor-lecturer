@@ -5,7 +5,7 @@ var _ = require('lodash');
 module.exports = function(DB){
   return [
     { path: '/api/exercises', dataCall: DB.Exercises.get, apiMethod: "get" },
-    { path: '/api/exercises/detailed/:id', dataCall: DB.Exercises.getDetailed, apiMethod: "getByParam", param: "id" },
+    { path: '/api/exercises/:id', dataCall: DB.Exercises.getById, apiMethod: "getByParam", param: "id" },
     { path: '/api/exercises', dataCall: DB.Manage.storeExercise, apiMethod: "putByBodyParam", param: "exercise" },
 
     { path: '/api/tutors', dataCall: DB.Manage.listTutors, apiMethod: "get"},
