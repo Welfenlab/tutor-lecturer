@@ -1,4 +1,7 @@
-address = 'http://localhost:8080/api'
+
+host = window.location.host.toString().split(":");
+port = host[1].split("/")[0];
+address = 'http://'+host[0]+':'+port+'/api'
 
 ajax = (method, url, data) ->
   $.ajax
@@ -18,8 +21,7 @@ api =
   put:
     exercise: (id, content) -> put "/exercises/#{id}", content
   post:
-    login: (username, password) -> post "/login",
-        username: username,
-        password: password
+    init: -> post '/db/init'
+    empty: -> post '/db/empty'
 
 module.exports = api

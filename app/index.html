@@ -49,24 +49,32 @@
             <div class="ui column">
                 <div class="ui inverted red menu navbar">
                     <a href="#overview" class="ui brand item">
-                      <i class="student icon"></i>
+                      <i class="rocket icon"></i>
                       Tutor Lecturer
                     </a>
-                    <a href="#" class="ui item">
+                    <a href="#students" class="ui item">
                         <i class="sign in icon"></i>
                         Students
                     </a>
-                    <a href="#overview" class="ui item">
+                    <a href="#exercises" class="ui item">
                         <i class="list icon"></i>
                         Exercises
                     </a>
-                    <a href="#exercise/ee256059-9d92-4774-9db2-456378e04586" class="ui item">
-                        <i class="file text outline icon"></i>
+                    <a href="#groups" class="ui item">
+                        <i class="users icon"></i>
+                        Groups
+                    </a>
+                    <a href="#tutors" class="ui item">
+                        <i class="student icon"></i>
                         Tutors
                     </a>
-                    <a href="" class="right item user" data-bind="if: user().loggedIn">
-                        <i class="icon"><img class="ui mini avatar image" data-bind="attr: { src: user().avatar }"/></i>
-                        <span data-bind="text: user().name"></span>
+                    <a href="#database" class="ui item">
+                        <i class="database icon"></i>
+                        Database
+                    </a>
+                    <a href="" class="right item user">
+                        <i class="icon rocket"></i>
+                        <span>Admin!!</span>
                     </a>
                 </div>
             </div>
@@ -104,6 +112,6 @@
     <div class="content" data-bind="component: { name: router.selected, params: router.parameters }"></div>
 </div>
 
-<script src="corrector.js"></script>
+<script src="lecturer.js"></script>
 </body>
 </html>

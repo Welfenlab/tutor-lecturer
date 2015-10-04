@@ -3,25 +3,28 @@ ko = require 'knockout'
 
 app.router.pages [
   {
-    path: 'login'
-    component: require('./pages/login/login')()
-  }
-  {
-    path: 'overview'
-    component: require('./pages/overview/overview')()
-  }
-  {
     path: 'students'
     component: require('./pages/students/students')()
   }
   {
-    path: /exercise\/?(.*)/
-    as: ['id'] #name the parameters
-    component: require('./pages/editor/editor')()
+    path: 'exercises'
+    component: require('./pages/exercises/exercises')()
+  }
+  {
+    path: 'tutors'
+    component: require('./pages/tutors/tutors')()
+  }
+  {
+    path: 'groups'
+    component: require('./pages/groups/groups')()
+  }
+  {
+    path: 'database'
+    component: require('./pages/database/database')()
   }
 ]
 
-app.router.goto 'login'
+app.router.goto 'students'
 
 $(window).bind "popstate", ->
   app.router.goto location.hash.substr(1)
