@@ -24,6 +24,7 @@ class ViewModel
 
   show: (data) ->
     @createNew(true)
+    @init data.internals.source, data.activationDate, data.dueDate
 
   save: ->
     api.put.exercise @currentExercise
@@ -46,18 +47,23 @@ class ViewModel
     @resultJSON JSON.stringify exercise, null, 2
 
   initnew: ->
-    editor = mdEditor.create 'editor-new', '', plugins: [
+    @init "", moment().add(7,"days"), moment().add(14,"days")
+
+  init: (value, activation, due) ->
+    editor = mdEditor.create 'editor-new', value, plugins: [
       (editor) =>
         @updatePreview editor
     ]
 
     $("#activation-date").kalendae({
+      selected: activation.format("MM/DD/YYYY")
       subscribe:
         change: (date) =>
           @activationDate date.toJSON()
           @updatePreview editor
       })
     $("#due-date").kalendae({
+      selected: due.format("MM/DD/YYYY")
       subscribe:
         change: (date) =>
           @dueDate date.toJSON()
