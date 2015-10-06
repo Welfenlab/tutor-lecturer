@@ -9,7 +9,7 @@ class ViewModel
     @createNew = ko.observable(false)
     @resultJSON = ko.observable("")
     @showOverview = ko.computed => !@createNew()
-    @exercises = ko.observable([])
+    @exercises = ko.observableArray()
 
   newExercise: ->
     @createNew(true)

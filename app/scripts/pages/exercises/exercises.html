@@ -1,9 +1,9 @@
 <div class="ui segment">
   <h1>Exercises</h1>
-  <!-- ko if: showOverview() -->
+  <!-- ko if: showOverview -->
   <h2>Overview</h2>
   <div class="ui big animated divided list">
-    <!-- ko foreach: exercises() -->
+    <!-- ko foreach: exercises -->
     <div class="item" data-bind="click: show" style="cursor:pointer">
       <i class="icon calendar"></i>
       <div class="content">
@@ -21,12 +21,12 @@
     <button class="ui green button" data-bind="click: newExercise">Create New</button>
   </div>
   <!-- /ko -->
-  <!-- ko if: createNew() -->
+  <!-- ko if: createNew -->
   <h2>New exercise</h2>
   <div class="ui grid">
     <div class="eight wide column exerciseEditor">
-      <div data-bind="template: { afterRender: function(){ $data.initnew() } }">
-        <div data-bind="attr: {'id': 'editor-new'}"></div>
+      <div data-bind="template: { afterRender: initNew.bind($data) }">
+        <div data-bind="attr: {id: 'editor-new'}"></div>
       </div>
     </div>
     <div class="eight wide column preview">
