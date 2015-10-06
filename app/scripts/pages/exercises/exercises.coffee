@@ -15,16 +15,25 @@ class ViewModel
     @dueDate = ko.observable(moment().add(14, "days").toJSON())
     @currentExercise = {}
 
+    api.get.exercises().then (ex) =>
+      @exercises(ex)
+
   newExercise: ->
     @currentExercise = {}
     @createNew(true)
 
-  show: ->
-
+  show: (data) ->
+    @createNew(true)
 
   save: ->
     api.put.exercise @currentExercise
     @createNew(false)
+
+  toDate: (json) ->
+    moment(json).format("DD.MM.YYYY")
+
+  fromNow: (json) ->
+    moment(json).fromNow()
 
   discard: ->
     @createNew(false)

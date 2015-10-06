@@ -4,15 +4,15 @@
   <h2>Overview</h2>
   <div class="ui big animated divided list">
     <!-- ko foreach: exercises -->
-    <div class="item" data-bind="click: show" style="cursor:pointer">
+    <div class="item" data-bind="click: function(){ $parent.show($data) }" style="cursor:pointer">
       <i class="icon calendar"></i>
       <div class="content">
         <b>Übung 1</b> freigeschaltet am:
-        <span data-bind="text: formattedActivationDate"></span>
-        (in <span data-bind="text: formattedActivationRemaining"></span>),
+        <span data-bind="text: $parent.toDate($data.activationDate)"></span>
+        (<span data-bind="text: $parent.fromNow($data.activationDate)"></span>),
         Abgaben bis zum
-        <span data-bind="text: formattedDueDate"></span>
-        (in <span data-bind="text: formattedDueRemaining"></span>),
+        <span data-bind="text: $parent.toDate($data.dueDate)"></span>
+        (<span data-bind="text: $parent.fromNow($data.dueDate)"></span>),
       </div>
     </div>
     <!-- /ko -->

@@ -7,8 +7,8 @@ module.exports = function(DB){
     { path: '/api/db/init', dataCall: DB.Utils.Init, apiMethod: "post" },
     { path: '/api/db/empty', dataCall: DB.Utils.Empty, apiMethod: "post" },
 
-    { path: '/api/exercises', dataCall: DB.Exercises.get, apiMethod: "get" },
-    { path: '/api/exercises/:id', dataCall: DB.Exercises.getById, apiMethod: "getByParam", param: "id" },
+    { path: '/api/exercises', dataCall: DB.Manage.get, apiMethod: "get" },
+    { path: '/api/exercises/:id', dataCall: DB.Manage.getById, apiMethod: "getByParam", param: "id" },
     { path: '/api/exercises', dataCall: DB.Manage.storeExercise, apiMethod: "putByBodyParam", param: "exercise" },
 
     { path: '/api/tutors', dataCall: DB.Manage.listTutors, apiMethod: "get"},
