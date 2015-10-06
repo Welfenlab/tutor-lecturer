@@ -3,6 +3,7 @@ _ = require 'lodash'
 api = require '../../api'
 mdEditor = require '@tutor/markdown-editor'
 m2e = require "@tutor/markdown2exercise"
+moment = require 'moment'
 
 class ViewModel
   constructor: ->
@@ -10,24 +11,49 @@ class ViewModel
     @resultJSON = ko.observable("")
     @showOverview = ko.computed => !@createNew()
     @exercises = ko.observableArray()
+    @activationDate = ko.observable(moment().add(7, "days").toJSON())
+    @dueDate = ko.observable(moment().add(14, "days").toJSON())
+    @currentExercise = {}
 
   newExercise: ->
+    @currentExercise = {}
     @createNew(true)
 
   show: ->
 
 
   save: ->
+    api.put.exercise @currentExercise
     @createNew(false)
 
   discard: ->
     @createNew(false)
 
+  updatePreview: (editor) ->
+    exercise = (m2e editor.getValue())
+    exercise.activationDate = @activationDate()
+    exercise.dueDate = @dueDate()
+    @currentExercise = exercise
+    @resultJSON JSON.stringify exercise, null, 2
+
   initnew: ->
     editor = mdEditor.create 'editor-new', '', plugins: [
       (editor) =>
-        @resultJSON JSON.stringify (m2e editor.getValue()), null, 2
+        @updatePreview editor
     ]
+
+    $("#activation-date").kalendae({
+      subscribe:
+        change: (date) =>
+          @activationDate date.toJSON()
+          @updatePreview editor
+      })
+    $("#due-date").kalendae({
+      subscribe:
+        change: (date) =>
+          @dueDate date.toJSON()
+          @updatePreview editor
+      })
 
 
 fs = require 'fs'

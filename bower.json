@@ -19,6 +19,7 @@
     "ace": "~1.1.9",
     "jailed": "~0.2.0",
     "semantic-ui": "~2.0.2",
-    "highlightjs": "~8.7.0"
+    "highlightjs": "~8.7.0",
+    "kalendae": "~0.4.1"
   }
 }

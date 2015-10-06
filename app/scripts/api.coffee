@@ -19,7 +19,7 @@ api =
     exercises: -> get('/exercises')
     exercise: (id) -> get("/exercises/#{id}")
   put:
-    exercise: (id, content) -> put "/exercises/#{id}", content
+    exercise: (exercise) -> put "/exercises", {exercise: exercise}
   post:
     init: -> post '/db/init'
     empty: -> post '/db/empty'
