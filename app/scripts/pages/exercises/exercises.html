@@ -1,23 +1,50 @@
 <div class="ui segment">
+  <h1>Exercises</h1>
+  <!-- ko if: showOverview() -->
+  <h2>Overview</h2>
   <div class="ui big animated divided list">
-    <!-- ko foreach: exercises -->
-    <!-- ko ifnot: isOld -->
+    <!-- ko foreach: exercises() -->
     <div class="item" data-bind="click: show" style="cursor:pointer">
       <i class="icon calendar"></i>
       <div class="content">
-        Abgabe der <div class="ui label">Übung <span data-bind="text: number"></span></div> bis zum <span data-bind="text: formattedDueDate"></span>
+        <b>Übung 1</b> freigeschaltet am:
+        <span data-bind="text: formattedActivationDate"></span>
+        (in <span data-bind="text: formattedActivationRemaining"></span>),
+        Abgaben bis zum
+        <span data-bind="text: formattedDueDate"></span>
+        (in <span data-bind="text: formattedDueRemaining"></span>),
       </div>
     </div>
-    <!-- /ko -->
-    <!-- ko if: isOld -->
-    <div class="item" data-bind="click: show" style="cursor:pointer">
-      <i class="icon checkmark green"></i>
-      <div class="content">
-        <div class="ui label">Übung <span data-bind="text: number"></span></div> ist korrigiert.
-        Sie haben <div class="ui label"><span data-bind="text: points"></span> Punkte </div> von <span data-bind="text: maxPoints"></span> m&ouml;glichen Punkten erreicht.
-      </div>
-    </div>
-    <!-- /ko -->
     <!-- /ko -->
   </div>
+  <div>
+    <button class="ui green button" data-bind="click: newExercise">Create New</button>
+  </div>
+  <!-- /ko -->
+  <!-- ko if: createNew() -->
+  <h2>New exercise</h2>
+  <div class="ui grid">
+    <div class="eight wide column exerciseEditor">
+      <div data-bind="template: { afterRender: function(){ $data.initnew() } }">
+        <div data-bind="attr: {'id': 'editor-new'}"></div>
+      </div>
+    </div>
+    <div class="eight wide column preview">
+      <div class="ui buttons">
+        <button class="ui button active">JSON Preview</button>
+        <button class="ui button">Student Preview</button>
+        <button class="ui button">Corrector Preview</button>
+      </div>
+      <pre><code id="preview-json" class="json hljs" data-bind="html: resultJSON">
+{
+  "bla" : "blubb"
+}
+      </code></pre>
+    </div>
+  </div>
+  <div>
+    <button class="ui primary button" data-bind="click: save">Save</button>
+    <button class="ui red button" data-bind="click: discard">Discard</button>
+  </div>
+  <!-- /ko -->
 </div>
