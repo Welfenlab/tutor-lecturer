@@ -14,7 +14,10 @@ class ViewModel
     @activationDate = ko.observable(moment().add(7, "days").toJSON())
     @dueDate = ko.observable(moment().add(14, "days").toJSON())
     @currentExercise = {}
+    
+    @reload()
 
+  reload: ->
     api.get.exercises().then (ex) =>
       @exercises(ex)
 
@@ -24,10 +27,14 @@ class ViewModel
 
   show: (data) ->
     @createNew(true)
+    @currentExercise = data
     @init data.internals.source, data.activationDate, data.dueDate
 
   save: ->
-    api.put.exercise @currentExercise
+    exercise = @currentExercise
+    exercise.tasks = _.map @currentExercise.tasks, (t, idx) -> t.number = idx + 1 ; t
+    api.put.exercise exercise
+    @reload()
     @createNew(false)
 
   toDate: (json) ->
@@ -37,12 +44,14 @@ class ViewModel
     moment(json).fromNow()
 
   discard: ->
+    @reload()
     @createNew(false)
 
   updatePreview: (editor) ->
     exercise = (m2e editor.getValue())
     exercise.activationDate = @activationDate()
     exercise.dueDate = @dueDate()
+    exercise.id = @currentExercise.id
     @currentExercise = exercise
     @resultJSON JSON.stringify exercise, null, 2
 
