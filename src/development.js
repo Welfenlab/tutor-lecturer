@@ -23,7 +23,7 @@ module.exports = function(config){
     restAPI = require("./rest")(MemDB);
     return new Promise(function(resolve){
       configureServer(restAPI, MemDB);
-      resolve(restAPI);
+      resolve({api: restAPI, db: DB});
     });
   } else {
     console.log("### development environment with RethinkDB @" +
@@ -32,7 +32,7 @@ module.exports = function(config){
     return rethinkDB.then(function(DB){
       restAPI = require("./rest")(DB);
       configureServer(restAPI, DB);
-      return restAPI;
+      return {api: restAPI, db: DB};
     });
   }
 }
