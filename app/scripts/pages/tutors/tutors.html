@@ -1,3 +1,40 @@
 <div class="ui segment">
-  <h1>Tutors!!!</h1>
+  <h2 class="ui header">
+    <i class="student icon"></i>
+    Tutors
+  </h2>
+
+  <table class="ui table">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Contingent</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- ko foreach: tutors -->
+      <tr>
+        <td data-bind="text: name"></td>
+        <td data-bind="text: contingent"></td>
+      </tr>
+      <!-- /ko -->
+      <tr>
+        <td colspan="2" class="left aligned">
+          <div class="ui left icon input">
+            <input type="text" placeholder="Username" data-bind="value: newUsername">
+            <i class="user icon"></i>
+          </div>
+          <div class="ui left icon input">
+            <input type="text" placeholder="Password" data-bind="value: newPassword">
+            <i class="key icon"></i>
+          </div>
+          <div class="ui left icon input">
+            <input type="number" placeholder="Contingent" data-bind="value: newContingent">
+            <i class="time icon"></i>
+          </div>
+          <div class="ui primary button" data-bind="click: createTutor, css: { loading: creating, disabled: !canCreate() }">Hinzufügen</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

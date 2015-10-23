@@ -35,7 +35,8 @@
     "lodash": "^3.10.1",
     "markdown-it": "^5.0.0",
     "moment": "^2.10.6",
-    "more-markdown": "^0.1.1"
+    "more-markdown": "^0.1.1",
+    "q": "^1.4.1"
   },
   "devDependencies": {
     "@tutor/dummy-auth": "^0.1.5",
