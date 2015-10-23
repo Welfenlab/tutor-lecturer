@@ -19,6 +19,9 @@ api =
     getAll: -> get '/tutors'
     create: (tutor) -> post '/tutors', tutor: tutor
 
+  students:
+    getAll: -> get '/users'
+
   get:
     exercises: -> get('/exercises')
     exercise: (id) -> get("/exercises/#{id}")

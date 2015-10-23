@@ -8,11 +8,9 @@ class ViewModel
     @studentSelected = ko.computed => @selectedStudent() isnt null
     @searchInput = ko.observable ''
 
-    @students = ko.observableArray [{
-      number: 123456
-    },{
-      number: 789098
-    }]
+    @students = ko.observableArray()
+    api.students.getAll()
+    .then (students) => @students students
 
     @displayedStudents = ko.computed () =>
       if @searchInput().trim() is ''

@@ -1,4 +1,9 @@
 <div class="ui segment">
+  <h2 class="ui header">
+    <i class="child icon"></i>
+    Students
+  </h2>
+
   <!-- ko ifnot: studentSelected -->
   <div class="ui form">
     <div class="inline field">
@@ -10,23 +15,27 @@
     <thead>
       <tr>
         <th>Matrikelnummer</th>
+        <th>Name</th>
+        <th>Pseudonym</th>
         <th>Punktestand</th>
         <th>Gruppe</th>
-        <th>Editieren</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       <!-- ko foreach: displayedStudents -->
       <tr>
-        <td data-bind="text: number"></td>
-        <td>376/500</td>
+        <td data-bind="text: matrikel"></td>
+        <td data-bind="text: name"></td>
+        <td data-bind="text: pseudonym"></td>
+        <td>&ndash;</td>
         <td>&ndash;</td>
         <td><div data-bind="click: function(){ $parent.selectedStudent($data); }" class="compact ui icon blue button"><i class="edit icon"></i></div></td>
       </tr>
       <!-- /ko -->
       <!-- ko if: displayedStudents().length == 0 -->
       <tr>
-        <td colspan="4" class="center aligned">Es wurden keine Studenten gefunden.</td>  
+        <td colspan="5" class="center aligned">Es wurden keine Studenten gefunden.</td>
       </tr>
       <!-- /ko -->
     </tbody>

@@ -1,7 +1,17 @@
 <div class="ui segment">
-  <h1>Database!!!</h1>
+  <h2 class="ui header">
+    <i class="database icon"></i>
+    Database
+  </h2>
   <div>
-    <button class="ui button" data-bind="click: init">Initialize database</button>
-    <button class="ui icon red button" data-bind="click: empty"><i class="erase icon"></i>Empty database</button>
+    <div class="ui checkbox">
+      <input type="checkbox" data-bind="checked: allow">
+      <label>I know what I am doing.</label>
+    </div><br/>
+
+    <button class="ui button" data-bind="click: init, css: { disabled: !allow() }">Initialize database</button>
+    <button class="ui icon red button" data-bind="click: empty, css: { disabled: !allow() }">
+      <i class="erase icon"></i>Empty database
+    </button>
   </div>
 </div>

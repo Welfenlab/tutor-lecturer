@@ -4,12 +4,15 @@ api = require '../../api'
 
 class ViewModel
   constructor: ->
+    @allow = ko.observable no
 
   init: ->
-    api.post.init()
+    if @allow()
+      api.post.init()
 
   empty: ->
-    api.post.empty()
+    if @allow()
+      api.post.empty()
 
 fs = require 'fs'
 module.exports = ->
