@@ -28,10 +28,10 @@ class ViewModel
     api.tutors.create
       name: @newUsername()
       password: @newPassword()
-      contingent: @newContingent()
+      contingent: parseInt @newContingent()
     .then =>
       @creating no
-      @tutors.push new TutorViewModel(name: @newUsername(), contingent: @newContingent())
+      @tutors.push new TutorViewModel(name: @newUsername(), contingent: parseInt @newContingent())
     .catch =>
       @creating no
       alert 'Creating the tutor failed.'
