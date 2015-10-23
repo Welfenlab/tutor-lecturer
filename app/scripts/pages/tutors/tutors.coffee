@@ -31,7 +31,7 @@ class ViewModel
       contingent: @newContingent()
     .then =>
       @creating no
-      @tutors.push new TutorViewModel(name: @newUsername, contingent: @newUsername())
+      @tutors.push new TutorViewModel(name: @newUsername(), contingent: @newContingent())
     .catch =>
       @creating no
       alert 'Creating the tutor failed.'
