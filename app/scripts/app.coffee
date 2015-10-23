@@ -6,16 +6,16 @@ Router = require './router'
 
 ko.components.register 'page-not-found', template: "<h2>Page not found</h2>"
 
-viewModel =
-  availableLanguages: ['en']
-  language: ko.observable 'en'
+class ViewModel
+  constructor: ->
+    @router = new Router()
 
-  router: new Router()
+  load: ->
+    @router.goto location.hash.substr(1)
 
 i18n.init {
   en:
     translation: require '../i18n/en'
   }, 'en', ko
-viewModel.language.subscribe (v) -> i18n.setLanguage v
 
-module.exports = viewModel
+module.exports = new ViewModel()

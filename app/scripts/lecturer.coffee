@@ -23,8 +23,7 @@ app.router.pages [
     component: require('./pages/database/database')()
   }
 ]
-
-app.router.goto 'students'
+app.load()
 
 $(window).bind "popstate", ->
   app.router.goto location.hash.substr(1)
