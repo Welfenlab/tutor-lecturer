@@ -31,7 +31,11 @@ class ViewModel
       contingent: parseInt @newContingent()
     .then =>
       @creating no
-      @tutors.push new TutorViewModel(name: @newUsername(), contingent: parseInt @newContingent())
+      existing = _.find @tutors(), (t) => t.name() == @newUsername()
+      if existing
+        existing.contingent parseInt @newContingent()
+      else
+        @tutors.push new TutorViewModel(name: @newUsername(), contingent: parseInt @newContingent())
       @newUsername ''
       @newPassword ''
       @newContingent null
