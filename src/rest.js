@@ -21,7 +21,7 @@ module.exports = function(DB){
           return DB.Manage.storeTutor(tutor)
         }
       );
-    }, apiMethod: "postByBodyParam", param: "tutor"},
+    }, apiMethod: "postByBodyParam", param: "tutor", errStatus: 400 },
 
     { path: '/api/groups', dataCall: DB.Manage.listGroups, apiMethod: "get" },
 
