@@ -6,7 +6,9 @@ address = proto + '//'+host+'/api'
 ajax = (method, url, data) ->
   Q $.ajax
     url: address + url
-    data: data
+    data: JSON.stringify data
+    contentType: 'application/json; charset=utf-8'
+    dataType: 'json'
     method: method
 
 get = ajax.bind undefined, 'GET'

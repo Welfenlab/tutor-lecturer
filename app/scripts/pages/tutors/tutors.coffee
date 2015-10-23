@@ -32,6 +32,9 @@ class ViewModel
     .then =>
       @creating no
       @tutors.push new TutorViewModel(name: @newUsername(), contingent: parseInt @newContingent())
+      @newUsername ''
+      @newPassword ''
+      @newContingent null
     .catch =>
       @creating no
       alert 'Creating the tutor failed.'

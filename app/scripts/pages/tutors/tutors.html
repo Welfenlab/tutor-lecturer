@@ -23,18 +23,18 @@
       <tr>
         <td colspan="2" class="left aligned">
           <div class="ui left icon input">
-            <input type="text" placeholder="Username" data-bind="value: newUsername">
+            <input type="text" placeholder="Username" data-bind="textInput: newUsername">
             <i class="user icon"></i>
           </div>
           <div class="ui left icon input">
-            <input type="text" placeholder="Password" data-bind="value: newPassword">
+            <input type="text" placeholder="Password" data-bind="textInput: newPassword">
             <i class="key icon"></i>
           </div>
           <div class="ui left icon input">
-            <input type="number" placeholder="Contingent" data-bind="value: newContingent">
+            <input type="number" placeholder="Contingent" data-bind="textInput: newContingent">
             <i class="time icon"></i>
           </div>
-          <div class="ui primary button" data-bind="click: createTutor, css: { loading: creating, disabled: !canCreate() }">Hinzufügen</div>
+          <button class="ui primary button" data-bind="click: createTutor, css: { loading: creating, disabled: !canCreate() }">Hinzufügen</button>
         </td>
       </tr>
     </tbody>
