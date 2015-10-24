@@ -24,6 +24,9 @@ api =
   students:
     getAll: -> get '/users'
 
+  groups:
+    getAll: -> get '/groups'
+
   get:
     exercises: -> get('/exercises')
     exercise: (id) -> get("/exercises/#{id}")
