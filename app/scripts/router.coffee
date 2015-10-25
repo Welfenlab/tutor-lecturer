@@ -28,7 +28,8 @@ class Router
 
       if not found
         @selected 'page-not-found'
-
+        
+      @path v
       history.pushState(null, '', '#' + v)
 
 module.exports = Router
