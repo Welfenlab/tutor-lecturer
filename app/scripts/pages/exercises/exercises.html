@@ -7,7 +7,7 @@
     <div class="item" data-bind="click: function(){ $parent.show($data) }" style="cursor:pointer">
       <i class="icon file text"></i>
       <div class="content">
-        <b>Übung 1</b> freigeschaltet am:
+        <b data-bind="text: title">Übung 1</b> freigeschaltet am:
         <span data-bind="text: $parent.toDate($data.activationDate)"></span>
         (<span data-bind="text: $parent.fromNow($data.activationDate)"></span>),
         Abgaben bis zum
