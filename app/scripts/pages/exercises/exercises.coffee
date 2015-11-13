@@ -69,9 +69,7 @@ class ViewModel
     @currentExercise new Exercise(data)
 
   save: ->
-    exercise = @currentExercise().json()
-    exercise.tasks = _.map exercise.tasks, (t, idx) -> t.number = idx + 1 ; t
-    api.put.exercise exercise
+    api.put.exercise @currentExercise().json()
     @reload()
     @createNew(false)
 

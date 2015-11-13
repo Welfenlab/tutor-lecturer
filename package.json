@@ -21,7 +21,7 @@
     "@tutor/javascript-editor-errors": "^0.1.2",
     "@tutor/login-form": "^0.1.1",
     "@tutor/markdown-editor": "^0.1.4",
-    "@tutor/markdown2exercise": "^0.1.7",
+    "@tutor/markdown2exercise": "^0.1.9",
     "@tutor/rethinkdb-database": "0.5.12",
     "@tutor/server": "^0.3.1",
     "bcrypt-then": "^1.0.0",
