@@ -8,11 +8,11 @@ class ViewModel
 
   init: ->
     if @allow()
-      api.post.init()
+      api.database.initialize().then -> alert 'Database initialized.'
 
   empty: ->
     if @allow()
-      api.post.empty()
+      api.database.clear().then -> alert 'Database cleared.'
 
 fs = require 'fs'
 module.exports = ->

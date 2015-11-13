@@ -1,3 +1,43 @@
 <div class="ui segment">
-  <h1>Groups!!!!</h1>
+  <h2 class="ui header">
+    <i class="users icon"></i>
+    Groups
+  </h2>
+
+  <table class="ui table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Members</th>
+        <th>Pending members</th>
+      </tr>
+    </thead>
+    <tbody data-bind="foreach: groups">
+      <tr>
+        <td data-bind="attr: { title: id }">
+          <span data-bind="text: shortId()"></span>&hellip;
+        </td>
+        <td>
+          <div class="ui horizontal tiny list" data-bind="foreach: members">
+            <div class="item">
+              <img class="ui avatar image" data-bind="attr: { src: avatarUrl }"/>
+              <div class="content">
+                <a class="header" data-bind="text: name"></a>
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class="ui horizontal tiny list" data-bind="foreach: pendingMembers">
+            <div class="item">
+              <img class="ui avatar image" data-bind="attr: { src: avatarUrl }"/>
+              <div class="content">
+                <a class="header" data-bind="text: name"></a>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

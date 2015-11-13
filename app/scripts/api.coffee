@@ -24,13 +24,18 @@ api =
   students:
     getAll: -> get '/users'
 
+  groups:
+    getAll: -> get '/groups'
+
   get:
     exercises: -> get('/exercises')
     exercise: (id) -> get("/exercises/#{id}")
+
   put:
     exercise: (exercise) -> put "/exercises", {exercise: exercise}
-  post:
-    init: -> post '/db/init'
-    empty: -> post '/db/empty'
+
+  database:
+    initialize: -> post '/db/init'
+    clear: -> post '/db/empty'
 
 module.exports = api
