@@ -5,16 +5,55 @@ mdEditor = require '@tutor/markdown-editor'
 m2e = require "@tutor/markdown2exercise"
 moment = require 'moment'
 
+class Exercise
+  constructor: (data) ->
+    if data
+      @id = ko.observable data.id
+      @activationDate = ko.observable data.activationDate
+      @dueDate = ko.observable data.dueDate
+      @source = ko.observable data.internals.source
+    else
+      @id = ko.observable()
+      @activationDate = ko.observable moment().add(7, 'days').toDate()
+      @dueDate = ko.observable moment().add(14, 'days').toDate()
+      @source = ko.observable ''
+
+    @json = ko.computed =>
+        exercise = m2e @source()
+        exercise.activationDate = @activationDate()
+        exercise.dueDate = @dueDate()
+        exercise.id = @id()
+        return exercise
+
 class ViewModel
   constructor: ->
     @createNew = ko.observable(false)
-    @resultJSON = ko.observable("")
     @showOverview = ko.computed => !@createNew()
     @exercises = ko.observableArray()
-    @activationDate = ko.observable(moment().add(7, "days").toJSON())
-    @dueDate = ko.observable(moment().add(14, "days").toJSON())
-    @currentExercise = {}
-    
+    @currentExercise = ko.observable new Exercise()
+    @resultJSON = ko.computed => JSON.stringify @currentExercise().json(), null, 2
+
+    @currentExercise.subscribe =>
+        editor = mdEditor.create 'editor-new', @currentExercise().source(), plugins: [
+          (editor) =>
+            @updatePreview editor
+        ]
+
+        $("#activation-date").kalendae({
+          selected: moment(@currentExercise().activationDate()).format("MM/DD/YYYY")
+          subscribe:
+            change: (date) =>
+              @currentExercise().activationDate date
+              @updatePreview editor
+          })
+        $("#due-date").kalendae({
+          selected: moment(@currentExercise().dueDate()).format("MM/DD/YYYY")
+          subscribe:
+            change: (date) =>
+              @currentExercise().dueDate date
+              @updatePreview editor
+          })
+
     @reload()
 
   reload: ->
@@ -22,17 +61,16 @@ class ViewModel
       @exercises(ex)
 
   newExercise: ->
-    @currentExercise = {}
     @createNew(true)
+    @currentExercise new Exercise()
 
   show: (data) ->
     @createNew(true)
-    @currentExercise = data
-    @init data.internals.source, data.activationDate, data.dueDate
+    @currentExercise new Exercise(data)
 
   save: ->
-    exercise = @currentExercise
-    exercise.tasks = _.map @currentExercise.tasks, (t, idx) -> t.number = idx + 1 ; t
+    exercise = @currentExercise().json()
+    exercise.tasks = _.map exercise.tasks, (t, idx) -> t.number = idx + 1 ; t
     api.put.exercise exercise
     @reload()
     @createNew(false)
@@ -48,37 +86,7 @@ class ViewModel
     @createNew(false)
 
   updatePreview: (editor) ->
-    exercise = (m2e editor.getValue())
-    exercise.activationDate = @activationDate()
-    exercise.dueDate = @dueDate()
-    exercise.id = @currentExercise.id
-    @currentExercise = exercise
-    @resultJSON JSON.stringify exercise, null, 2
-
-  initnew: ->
-    @init "", moment().add(7,"days"), moment().add(14,"days")
-
-  init: (value, activation, due) ->
-    editor = mdEditor.create 'editor-new', value, plugins: [
-      (editor) =>
-        @updatePreview editor
-    ]
-
-    $("#activation-date").kalendae({
-      selected: activation.format("MM/DD/YYYY")
-      subscribe:
-        change: (date) =>
-          @activationDate date.toJSON()
-          @updatePreview editor
-      })
-    $("#due-date").kalendae({
-      selected: due.format("MM/DD/YYYY")
-      subscribe:
-        change: (date) =>
-          @dueDate date.toJSON()
-          @updatePreview editor
-      })
-
+    @currentExercise().source editor.getValue()
 
 fs = require 'fs'
 module.exports = ->

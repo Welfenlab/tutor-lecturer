@@ -29,7 +29,7 @@
   <h2>New exercise</h2>
   <div class="ui grid">
     <div class="eight wide column exerciseEditor">
-      <div data-bind="template: { afterRender: function(){ $data.initnew() } }">
+      <div>
         <div class="field">
           <label>Activation Date</label>
           <input id="activation-date" type="text" />
@@ -38,7 +38,7 @@
           <label>Due Date</label>
           <input id="due-date" type="text" />
         </div>
-        <div data-bind="attr: {'id': 'editor-new'}"></div>
+        <div id="editor-new"></div>
       </div>
     </div>
     <div class="eight wide column preview">
