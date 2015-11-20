@@ -16,7 +16,7 @@ class ViewModel
       if @searchInput().trim() is ''
         @students()
       else
-        _.filter @students(), (student) => (''+student.number).indexOf(@searchInput()) is 0
+        _.filter @students(), (student) => ('' + student.matrikel).indexOf(@searchInput()) is 0
 
 fs = require 'fs'
 module.exports = ->
