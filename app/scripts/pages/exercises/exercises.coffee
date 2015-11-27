@@ -58,7 +58,7 @@ class ViewModel
 
   reload: ->
     api.get.exercises().then (ex) =>
-      @exercises(ex)
+      @exercises(ex.sort((a, b) -> parseInt(a.number) - parseInt(b.number)))
 
   newExercise: ->
     @createNew(true)

@@ -6,25 +6,37 @@
 
   <!-- ko if: showOverview -->
   <h2>Overview</h2>
-  <div class="ui big animated divided list">
-    <!-- ko foreach: exercises -->
-    <div class="item" data-bind="click: function(){ $parent.show($data) }" style="cursor:pointer">
-      <i class="icon file text"></i>
-      <div class="content">
-        <b data-bind="text: title">Übung 1</b> freigeschaltet am:
-        <span data-bind="text: $parent.toDate($data.activationDate)"></span>
-        (<span data-bind="text: $parent.fromNow($data.activationDate)"></span>),
-        Abgaben bis zum
-        <span data-bind="text: $parent.toDate($data.dueDate)"></span>
-        (<span data-bind="text: $parent.fromNow($data.dueDate)"></span>),
-      </div>
-    </div>
-    <!-- /ko -->
-  </div>
+
+  <table class="ui table">
+    <thead>
+      <tr>
+        <th>Titel, Nr.</th>
+        <th>Aktivierungsdatum</th>
+        <th>Abgabedatum</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- ko foreach: exercises -->
+      <tr class="item" data-bind="click: function(){ $parent.show($data) }" style="cursor:pointer">
+        <td data-bind="text: title">Übung 1</<td>
+        <td>
+          <span data-bind="text: $parent.toDate($data.activationDate)"></span>
+          (<span data-bind="text: $parent.fromNow($data.activationDate)"></span>)
+        </td>
+        <td>
+          <span data-bind="text: $parent.toDate($data.dueDate)"></span>
+          (<span data-bind="text: $parent.fromNow($data.dueDate)"></span>)
+        </td>
+      </tr>
+      <!-- /ko -->
+    </tbody>
+  </table>
   <div>
     <button class="ui green button" data-bind="click: newExercise">Create New</button>
   </div>
   <!-- /ko -->
+
   <!-- ko if: createNew -->
   <h2>New exercise</h2>
   <div class="ui grid">
@@ -47,11 +59,7 @@
         <button class="ui button">Student Preview</button>
         <button class="ui button">Corrector Preview</button>
       </div>
-      <pre><code id="preview-json" class="json hljs" data-bind="html: resultJSON">
-{
-  "bla" : "blubb"
-}
-      </code></pre>
+      <pre><code id="preview-json" class="json hljs" data-bind="html: resultJSON"></code></pre>
     </div>
   </div>
   <div>
