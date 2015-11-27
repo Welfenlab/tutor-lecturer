@@ -32,6 +32,7 @@ class ViewModel
     @exercises = ko.observableArray()
     @currentExercise = ko.observable new Exercise()
     @resultJSON = ko.computed => JSON.stringify @currentExercise().json(), null, 2
+    @warnings = ko.computed => m2e.check @currentExercise().source()
 
     @currentExercise.subscribe =>
         editor = mdEditor.create 'editor-new', @currentExercise().source(), plugins: [

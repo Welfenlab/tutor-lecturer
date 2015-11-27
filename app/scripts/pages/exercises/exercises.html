@@ -1,11 +1,9 @@
 <div class="ui segment">
+  <!-- ko if: showOverview -->
   <h2 class="ui header">
     <i class="list icon"></i>
     Exercises
   </h2>
-
-  <!-- ko if: showOverview -->
-  <h2>Overview</h2>
 
   <table class="ui table">
     <thead>
@@ -38,7 +36,11 @@
   <!-- /ko -->
 
   <!-- ko if: createNew -->
-  <h2>New exercise</h2>
+  <h2 class="ui header">
+    <i class="edit icon"></i>
+    Create exercise
+  </h2>
+
   <div class="ui grid">
     <div class="eight wide column exerciseEditor">
       <div>
@@ -50,16 +52,42 @@
           <label>Due Date</label>
           <input id="due-date" type="text" />
         </div>
+        <br/>
         <div id="editor-new"></div>
       </div>
     </div>
     <div class="eight wide column preview">
-      <div class="ui buttons">
-        <button class="ui button active">JSON Preview</button>
-        <button class="ui button">Student Preview</button>
-        <button class="ui button">Corrector Preview</button>
+      <div class="ui tabular menu" data-bind="template: { afterRender: function (e) { console.log(e); $(e).tab() } }">
+        <div class="active item" data-tab="json-tab">JSON</div>
+        <div class="item" data-tab="preview-tab">Preview</div>
+        <div class="item" data-tab="warning-tab">
+          Warnings
+          <div class="ui red label" data-bind="visible: warnings().length > 0, text: warnings().length"></div>
+        </div>
+        <!--<div class="disabled item">Corrector</div>-->
       </div>
-      <pre><code id="preview-json" class="json hljs" data-bind="html: resultJSON"></code></pre>
+      <div class="ui active tab" data-tab="json-tab">
+        <pre><code id="preview-json" class="json hljs" data-bind="html: resultJSON"></code></pre>
+      </div>
+      <div class="ui tab" data-tab="preview-tab">
+      </div>
+      <div class="ui tab" data-tab="warning-tab" data-bind="foreach: warnings">
+        <div class="ui divided items">
+          <div class="item">
+            <!-- ko if: level == 'info' -->
+            <i class="blue info circle icon"></i>
+            <!-- /ko -->
+            <!-- ko if: level == 'warning' -->
+            <i class="orange warning sign icon"></i>
+            <!-- /ko -->
+            <!-- ko if: level == 'error' -->
+            <i class="red warning circle icon"></i>
+            <!-- /ko -->
+
+            <span data-bind="text: message"></span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div>
