@@ -4,6 +4,7 @@ api = require '../../api'
 mdEditor = require '@tutor/markdown-editor'
 m2e = require "@tutor/markdown2exercise"
 moment = require 'moment'
+require '@tutor/task-preview'
 
 class Exercise
   constructor: (data) ->
@@ -87,6 +88,11 @@ class ViewModel
 
   updatePreview: (editor) ->
     @currentExercise().source editor.getValue()
+
+  previewify: (task) ->
+    previewTask = ko.mapping.fromJS(task)
+    previewTask.solution = previewTask.prefilled
+    return previewTask
 
 fs = require 'fs'
 module.exports = ->

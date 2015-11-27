@@ -9,7 +9,10 @@ var libs = [
   "brace",
   "knockout",
   "markdown-it",
-  "lodash"
+  "lodash",
+  "d3",
+  "dagre-d3",
+  "graphlib-dot"
 ];
 
 // libs that are not used in production and thus can be removed

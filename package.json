@@ -59,7 +59,10 @@
     "morgan": "^1.6.1",
     "open": "0.0.5",
     "request": "^2.63.0",
-    "vinyl-source-stream": "~1.0.0"
+    "vinyl-source-stream": "~1.0.0",
+    "d3": "^3.5.6",
+    "graphlib-dot": "^0.6.2",
+    "dagre-d3": "^0.4.10"
   },
   "private": true
 }

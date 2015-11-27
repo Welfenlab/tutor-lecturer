@@ -71,14 +71,7 @@
       </div>
       <div class="ui tab" data-tab="preview-tab">
         <!-- ko foreach: exerciseData().tasks -->
-        <div class="task">
-          <span class="task">
-            Task <span data-bind="text: $data.number"></span>
-            &ndash; <span data-bind="text: $data.title"></span>
-            <span class="points">(<span data-bind="text: $data.maxPoints"></span> points)</span>
-          </span><br/>
-          <div class="description" data-bind="attr: {'id': 'text-task-' + $data.number()}"></div>
-        </div>
+        <tutor-task-preview params="{task: $parent.previewify.call($parent, $data)}"></tutor-task-preview>
         <!-- /ko -->
       </div>
       <div class="ui tab" data-tab="warning-tab" data-bind="foreach: warnings">
