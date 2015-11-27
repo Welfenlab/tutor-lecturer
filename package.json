@@ -22,7 +22,7 @@
     "@tutor/login-form": "^0.1.1",
     "@tutor/markdown-editor": "^0.1.4",
     "@tutor/markdown2exercise": "^0.1.10",
-    "@tutor/rethinkdb-database": "0.5.22",
+    "@tutor/rethinkdb-database": "0.5.24",
     "@tutor/server": "^0.3.4",
     "bcrypt-then": "^1.0.0",
     "blueimp-md5": "^1.1.1",
