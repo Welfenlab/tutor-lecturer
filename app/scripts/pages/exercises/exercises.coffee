@@ -31,7 +31,8 @@ class ViewModel
     @showOverview = ko.computed => !@createNew()
     @exercises = ko.observableArray()
     @currentExercise = ko.observable new Exercise()
-    @resultJSON = ko.computed => JSON.stringify @currentExercise().json(), null, 2
+    @exerciseData = ko.computed => @currentExercise().json()
+    @resultJSON = ko.computed => JSON.stringify @exerciseData(), null, 2
     @warnings = ko.computed => m2e.check @currentExercise().source()
 
     @currentExercise.subscribe =>
