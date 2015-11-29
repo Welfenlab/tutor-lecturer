@@ -19,13 +19,17 @@ del = ajax.bind undefined, 'DELETE'
 api =
   tutors:
     getAll: -> get '/tutors'
-    create: (tutor) -> post '/tutors', tutor: tutor
+    create: (tutor) -> post '/tutors', {tutor: tutor}
 
   students:
     getAll: -> get '/users'
 
   groups:
     getAll: -> get '/groups'
+
+  solutions:
+    getOfStudent: (id) -> get "/students/#{id}/solutions"
+    search: (query) -> get '/solutions', {search: query}
 
   get:
     exercises: -> get('/exercises')

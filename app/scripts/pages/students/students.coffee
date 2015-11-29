@@ -2,6 +2,18 @@ ko = require 'knockout'
 _ = require 'lodash'
 api = require '../../api'
 
+class StudentViewModel
+  constructor: (data) ->
+    @id = data.id
+    @matrikel = data.matrikel
+    @name = data.name
+    @pseudonym = data.pseudonym
+    @solutions = ko.observableArray()
+
+  load: ->
+    api.solutions.getOfStudent(@id).then (solutions) ->
+      @solutions solutions
+
 class ViewModel
   constructor: ->
     @selectedStudent = ko.observable null
@@ -10,13 +22,17 @@ class ViewModel
 
     @students = ko.observableArray()
     api.students.getAll()
-    .then (students) => @students students
+    .then (students) => @students students.map((s) -> new StudentViewModel(s))
 
     @displayedStudents = ko.computed () =>
       if @searchInput().trim() is ''
         @students()
       else
         _.filter @students(), (student) => ('' + student.matrikel).indexOf(@searchInput()) is 0
+
+  showStudent: (student) ->
+    @selectedStudent(student)
+    student.load()
 
 fs = require 'fs'
 module.exports = ->

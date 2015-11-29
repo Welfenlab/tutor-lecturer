@@ -1,10 +1,9 @@
 <div class="ui segment">
+  <!-- ko ifnot: studentSelected -->
   <h2 class="ui header">
     <i class="child icon"></i>
     Students
   </h2>
-
-  <!-- ko ifnot: studentSelected -->
   <div class="ui form">
     <div class="inline field">
       <input type="text" data-bind="textInput: searchInput" placeholder="Matrikelnummer suchen&hellip;" />
@@ -29,7 +28,7 @@
         <td data-bind="text: pseudonym"></td>
         <td>&ndash;</td>
         <td>&ndash;</td>
-        <td><div data-bind="click: function(){ $parent.selectedStudent($data); }" class="compact ui icon blue button"><i class="edit icon"></i></div></td>
+        <td><div data-bind="click: $parent.showStudent.bind($parent, $data)" class="compact ui icon blue button"><i class="edit icon"></i></div></td>
       </tr>
       <!-- /ko -->
       <!-- ko if: displayedStudents().length == 0 -->
@@ -41,35 +40,23 @@
   </table>
   <!-- /ko -->
   <!-- ko if: studentSelected -->
-  <div class="ui right icon button"  data-bind="click: function(){ $data.selectedStudent(null); }">
-    <i class="arrow left icon"></i>
-  </div>
-  <h4 class="ui horizontal header divider">
-    <i class="user icon"></i>
-    Student <span data-bind="text: selectedStudent.number"></span>
-  </h4>
-  <div class="ui cards">
+  <h2 class="ui header">
+    <i class="child icon"></i>
+    <div class="content">
+      <span data-bind="text: selectedStudent().name"></span>
+      <em>(<span data-bind="text: selectedStudent().pseudonym"></span>)</em>
+    </div>
+  </h2>
+  <p data-bind="visible: selectedStudent().solutions().length == 0">
+    Dieser Student hat keine Abgaben.
+  </p>
+  <div class="ui cards" data-bind="foreach: selectedStudent().solutions">
     <div class="ui card">
       <div class="content">
         <div class="header">Übung 1</div>
         <div class="description">
           <div class="ui header huge important">
             <b>60 </b>
-            <span style="color:lightgray">/ 100</span>
-          </div>
-        </div>
-      </div>
-      <div class="ui bottom attached blue button">
-        <i class="edit icon"></i>
-        Bearbeiten
-      </div>
-    </div>
-    <div class="ui card">
-      <div class="content">
-        <div class="header">Übung 2</div>
-        <div class="description">
-          <div class="ui header huge important">
-            <b>77 </b>
             <span style="color:lightgray">/ 100</span>
           </div>
         </div>
