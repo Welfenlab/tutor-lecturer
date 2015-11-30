@@ -52,9 +52,9 @@ class ViewModel
         $("#due-date").kalendae({
           selected: moment(@currentExercise().dueDate()).format("MM/DD/YYYY")
           subscribe:
-            change: (date) =>
+            change: _.throttle ((date) =>
               @currentExercise().dueDate date
-              @updatePreview editor
+              @updatePreview editor), 250
           })
 
     @reload()
