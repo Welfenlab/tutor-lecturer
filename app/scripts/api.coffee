@@ -22,7 +22,7 @@ api =
     create: (tutor) -> post '/tutors', {tutor: tutor}
 
   students:
-    getAll: -> get '/users'
+    getAll: -> get '/students'
 
   groups:
     getAll: -> get '/groups'

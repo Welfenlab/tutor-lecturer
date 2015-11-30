@@ -25,8 +25,8 @@ module.exports = function(DB){
 
     { path: '/api/groups', dataCall: DB.Manage.listGroups, apiMethod: "get" },
 
-    { path: '/api/users', dataCall: DB.Manage.listUsers, apiMethod: "get"},
-    
+    { path: '/api/students', dataCall: DB.Manage.listUsers, apiMethod: "get"},
+
     { path: '/api/students/:studentId/solutions', dataCall: DB.Manage.getStudentsSolutions, apiMethod: 'getByParam', param: 'studentId', errStatus: 400},
 
     { path: '/api/solutions/', dataCall: DB.Manage.querySolutions, apiMethod: 'getByQuery', param: 'search', errStatus: 400},
