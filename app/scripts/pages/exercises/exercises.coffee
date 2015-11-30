@@ -38,8 +38,8 @@ class ViewModel
 
     @currentExercise.subscribe =>
         editor = mdEditor.create 'editor-new', @currentExercise().source(), plugins: [
-          (editor) =>
-            @updatePreview editor
+          _.throttle ((editor) =>
+            @updatePreview editor), 1000
         ]
 
         $("#activation-date").kalendae({
@@ -52,9 +52,9 @@ class ViewModel
         $("#due-date").kalendae({
           selected: moment(@currentExercise().dueDate()).format("MM/DD/YYYY")
           subscribe:
-            change: _.throttle ((date) =>
+            change: (date) =>
               @currentExercise().dueDate date
-              @updatePreview editor), 250
+              @updatePreview editor
           })
 
     @reload()
