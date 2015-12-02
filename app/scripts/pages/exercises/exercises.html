@@ -71,7 +71,7 @@
       </div>
       <div class="ui tab" data-tab="preview-tab">
         <!-- ko foreach: exerciseData().tasks -->
-        <tutor-task-preview params="{task: $parent.previewify.call($parent, $data)}"></tutor-task-preview>
+        <tutor-task-preview params="{task: $parent.previewify.call($parent, $data), showModelSolutionPreview: true}"></tutor-task-preview>
         <!-- /ko -->
       </div>
       <div class="ui tab" data-tab="warning-tab" data-bind="foreach: warnings">

@@ -91,6 +91,7 @@ class ViewModel
 
   previewify: (task) ->
     previewTask = ko.mapping.fromJS(task)
+    previewTask.modelSolution = previewTask.solution
     previewTask.solution = previewTask.prefilled
     return previewTask
 
