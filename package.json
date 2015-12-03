@@ -24,7 +24,7 @@
     "@tutor/markdown2exercise": "^0.1.11",
     "@tutor/rethinkdb-database": "0.5.24",
     "@tutor/server": "^0.3.4",
-    "@tutor/task-preview": "^0.1.9",
+    "@tutor/task-preview": "^0.1.10",
     "bcrypt-then": "^1.0.0",
     "blueimp-md5": "^1.1.1",
     "brace": "^0.5.1",
@@ -48,6 +48,9 @@
     "browserify-shim": "^3.8.10",
     "chai": "^3.3.0",
     "coffeeify": "^1.1.0",
+    "d3": "^3.5.6",
+    "dagre-d3": "^0.4.10",
+    "graphlib-dot": "^0.6.2",
     "gulp": "^3.9.0",
     "gulp-coffee": "^2.3.1",
     "gulp-concat": "^2.6.0",
@@ -56,14 +59,12 @@
     "gulp-plumber": "^1.0.1",
     "gulp-util": "^3.0.6",
     "gulp-watch": "^4.3.3",
+    "less-plugin-npm-import": "^2.1.0",
     "mocha": "^2.3.3",
     "morgan": "^1.6.1",
     "open": "0.0.5",
     "request": "^2.63.0",
-    "vinyl-source-stream": "~1.0.0",
-    "d3": "^3.5.6",
-    "graphlib-dot": "^0.6.2",
-    "dagre-d3": "^0.4.10"
+    "vinyl-source-stream": "~1.0.0"
   },
   "private": true
 }
