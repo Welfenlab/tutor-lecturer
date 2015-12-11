@@ -14,7 +14,7 @@ class Exercise
       @dueDate = ko.observable data.dueDate
       @source = ko.observable data.internals.source
     else
-      @id = ko.observable()
+      @id = ko.observable('')
       @activationDate = ko.observable moment().add(7, 'days').toDate()
       @dueDate = ko.observable moment().add(14, 'days').toDate()
       @source = ko.observable ''

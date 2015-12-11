@@ -8,6 +8,7 @@
   <table class="ui table">
     <thead>
       <tr>
+        <th>ID</th>
         <th>Titel, Nr.</th>
         <th>Aktivierungsdatum</th>
         <th>Abgabedatum</th>
@@ -17,6 +18,9 @@
     <tbody>
       <!-- ko foreach: exercises -->
       <tr class="item" data-bind="click: function(){ $parent.show($data) }" style="cursor:pointer">
+        <td data-bind="attr: { title: id }">
+          <span data-bind="text: id.substring(0, 6)"></span>&hellip;
+        </td>
         <td data-bind="text: title">Übung 1</<td>
         <td>
           <span data-bind="text: $parent.toDate($data.activationDate)"></span>

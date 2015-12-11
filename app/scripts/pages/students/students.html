@@ -12,6 +12,7 @@
   <table class="ui table">
     <thead>
       <tr>
+        <th>ID</th>
         <th>Matrikelnummer</th>
         <th>Name</th>
         <th>Pseudonym</th>
@@ -23,6 +24,10 @@
     <tbody>
       <!-- ko foreach: displayedStudents -->
       <tr>
+        <td data-bind="attr: { title: id }">
+          <span data-bind="text: shortId"></span>&hellip;
+        </td>
+        <td data-bind="text: matrikel"></td>
         <td data-bind="text: matrikel"></td>
         <td data-bind="text: name"></td>
         <td data-bind="text: pseudonym"></td>

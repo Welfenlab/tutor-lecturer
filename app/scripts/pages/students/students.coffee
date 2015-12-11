@@ -5,6 +5,7 @@ api = require '../../api'
 class StudentViewModel
   constructor: (data) ->
     @id = data.id
+    @shortId = ko.computed => @id.substring(0, 6)
     @matrikel = data.matrikel
     @name = data.name
     @pseudonym = data.pseudonym
