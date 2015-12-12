@@ -49,11 +49,11 @@
     <div class="eight wide column exerciseEditor">
       <div>
         <div class="field">
-          <label>Activation Date</label>
+          <label>Activation Date:</label>
           <input id="activation-date" type="text" />
         </div>
         <div class="field">
-          <label>Due Date</label>
+          <label>Due Date:</label>
           <input id="due-date" type="text" />
         </div>
         <br/>
@@ -61,7 +61,7 @@
       </div>
     </div>
     <div class="eight wide column preview">
-      <div class="ui tabular menu" data-bind="template: { afterRender: function (e) { console.log(e); $(e).tab() } }">
+      <div class="ui tabular menu" data-bind="template: { afterRender: function (e) { $(e).tab() } }">
         <div class="active item" data-tab="json-tab">JSON</div>
         <div class="item" data-tab="preview-tab">Preview</div>
         <div class="item" data-tab="warning-tab">
@@ -74,8 +74,16 @@
         <pre><code id="preview-json" class="json hljs" data-bind="html: resultJSON"></code></pre>
       </div>
       <div class="ui tab" data-tab="preview-tab">
-        <!-- ko foreach: exerciseData().tasks -->
-        <tutor-task-preview params="{task: $parent.previewify.call($parent, $data), showModelSolutionPreview: true}"></tutor-task-preview>
+        <!-- ko foreach: currentExercise().exercise.tasks -->
+        <h3 class="task">
+          Task <span data-bind="text: number"></span>
+          <!--ko if: title --> &ndash; <span data-bind="text: title"></span><!-- /ko -->
+        </h3>
+        <tutor-task-markdown params="markdown: text"></tutor-task-markdown>
+        <div class="ui horizontal divider">Vorgegebener Lösungstext</div>
+        <tutor-task-markdown params="markdown: prefilled"></tutor-task-markdown>
+        <div class="ui horizontal divider">Musterlösung</div>
+        <tutor-task-markdown params="markdown: solution"></tutor-task-markdown>
         <!-- /ko -->
       </div>
       <div class="ui tab" data-tab="warning-tab" data-bind="foreach: warnings">

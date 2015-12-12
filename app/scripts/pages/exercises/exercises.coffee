@@ -19,6 +19,9 @@ class Exercise
       @dueDate = ko.observable moment().add(14, 'days').toDate()
       @source = ko.observable ''
 
+    @exercise = ko.mapping.fromJS m2e(@source())
+    @source.subscribe (v) => ko.mapping.fromJS m2e(@source()), @exercise
+
     @json = ko.computed =>
         exercise = m2e @source()
         exercise.activationDate = @activationDate()
