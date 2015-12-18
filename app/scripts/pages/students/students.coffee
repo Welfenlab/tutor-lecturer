@@ -12,7 +12,7 @@ class StudentViewModel
     @solutions = ko.observableArray()
 
   load: ->
-    api.solutions.getOfStudent(@id).then (solutions) ->
+    api.solutions.getOfStudent(@id).then (solutions) =>
       @solutions solutions
 
 class ViewModel
