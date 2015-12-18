@@ -18,7 +18,7 @@ module.exports = function(config){
     config.modules = []
 
     return rethinkDB.then(function(DB){
-      restAPI = require("./rest")(DB);
+      restAPI = require("./rest")(DB, config);
       config.modules.push(function(app, config){
         app.use(express.static('./build'));
       });

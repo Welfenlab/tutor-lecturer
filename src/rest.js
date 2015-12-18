@@ -1,8 +1,17 @@
 
 var bcrypt = require('bcrypt-then');
 var _ = require('lodash');
+var request = require('request');
 
-module.exports = function(DB){
+module.exports = function(DB, config){
+  config.slave = config.slave || {}
+  if(process.env.SLAVE_PORT){
+    config.slave.port = process.env.SLAVE_PORT
+  }
+  if(process.env.SLAVE_HOST){
+    config.slave.host = process.env.SLAVE_HOST
+  }
+  
   return [
     { path: '/api/db/init', dataCall: DB.Utils.Init, apiMethod: "post" },
     { path: '/api/db/empty', dataCall: DB.Utils.Empty, apiMethod: "post" },
@@ -30,5 +39,31 @@ module.exports = function(DB){
     { path: '/api/students/:studentId/solutions', dataCall: DB.Manage.getStudentsSolutions, apiMethod: 'getByParam', param: 'studentId', errStatus: 400},
 
     { path: '/api/solutions/', dataCall: DB.Manage.querySolutions, apiMethod: 'getByQuery', param: 'search', errStatus: 400},
+    
+    { path: '/api/slave/sync/solution/:id', dataCall: function(id) {
+      return new Promise(function(resolve, reject) {
+        request('http://' + config.slave.host + ':' + config.slave.port + '/solution/store/' + id, function(err, response, body){
+           if(err){
+             reject(err)
+           }
+           resolve()
+        })
+      });
+    }, apiMethod: "postByBodyParam" },
+    
+    { path: '/api/slave/pfd/for/solution/:id', dataCall: function(id) {
+      return new Promise(function(resolve, reject) {
+        request('http://' + config.slave.host + ':' + config.slave.port + '/pdf/process/' + id, function(err, response, body){
+           if(err){
+             reject(err)
+           }
+           resolve()
+        })
+      });
+    }, apiMethod: "postByBodyParam" },
+    
+    { path: '/api/config', dataCall: function(){
+      return Promise.resolve(config)
+    }, apiMethod: 'get' }
   ];
 };

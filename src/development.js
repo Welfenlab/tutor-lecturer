@@ -20,7 +20,7 @@ module.exports = function(config){
   if(!config.devrdb){
     console.log("### development environment ###");
     var MemDB = require("@tutor/memory-database")(config);
-    restAPI = require("./rest")(MemDB);
+    restAPI = require("./rest")(MemDB, config);
     return new Promise(function(resolve){
       configureServer(restAPI, MemDB);
       resolve({api: restAPI, db: DB});
@@ -30,7 +30,7 @@ module.exports = function(config){
       config.database.host + ":" + config.database.port + "/" + config.database.name + " ###")
     var rethinkDB = require("@tutor/rethinkdb-database")(config);
     return rethinkDB.then(function(DB){
-      restAPI = require("./rest")(DB);
+      restAPI = require("./rest")(DB, config);
       configureServer(restAPI, DB);
       return {api: restAPI, db: DB};
     });
