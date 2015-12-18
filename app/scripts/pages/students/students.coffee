@@ -38,7 +38,7 @@ class ViewModel
 
   editSolution: (solution) ->
     @config.then (config) =>
-      window.open("#{config.correctorUrl}/#correction/#{solution.id}", '_blank')
+      window.open("#{config.correctorUrl}/#correction/by-solution/#{solution.id}", '_blank')
 
 fs = require 'fs'
 module.exports = ->
