@@ -20,6 +20,7 @@ class ViewModel
     @selectedStudent = ko.observable null
     @studentSelected = ko.computed => @selectedStudent() isnt null
     @searchInput = ko.observable ''
+    @config = api.get.config()
 
     @students = ko.observableArray()
     api.students.getAll()
@@ -34,6 +35,10 @@ class ViewModel
   showStudent: (student) ->
     @selectedStudent(student)
     student.load()
+
+  editSolution: (solution) ->
+    @config.then (config) =>
+      window.open("#{config.correctorUrl}/#correction/#{solution.id}", '_blank')
 
 fs = require 'fs'
 module.exports = ->

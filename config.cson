@@ -27,3 +27,6 @@ session:
   secret: "DUMMY_SECRET"
   login_redirect: "/"
   restrict: "/api"
+
+# corrector url (for links)
+correctorUrl: "http://localhost:8082"

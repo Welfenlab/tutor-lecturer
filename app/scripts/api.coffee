@@ -34,6 +34,7 @@ api =
   get:
     exercises: -> get('/exercises')
     exercise: (id) -> get("/exercises/#{id}")
+    config: -> get('/config')
 
   put:
     exercise: (exercise) -> put "/exercises", {exercise: exercise}
