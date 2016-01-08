@@ -2,6 +2,17 @@ ko = require 'knockout'
 _ = require 'lodash'
 api = require '../../api'
 
+class SolutionViewModel
+  constructor: (data) ->
+    @id = data.id
+    @points = _.sum data.result.points
+    @maximumPoints = ko.observable 0
+    @title = ko.observable 'Loading...'
+
+    api.get.exercise(data.exercise).then (exercise) =>
+      @maximumPoints _.sum exercise.tasks, 'maxPoints'
+      @title exercise.title
+
 class StudentViewModel
   constructor: (data) ->
     @id = data.id
@@ -9,11 +20,18 @@ class StudentViewModel
     @matrikel = data.matrikel
     @name = data.name
     @pseudonym = data.pseudonym
-    @solutions = ko.observableArray()
+    @solutions = ko.observable([])
 
-  load: ->
+    @totalPoints = ko.computed => _.sum @solutions(), (s) -> s.points
+    @maximumPoints = ko.computed => _.sum @solutions(), (s) -> s.maximumPoints()
+    @pointsPercentage = ko.computed =>
+      if @maximumPoints() > 0
+        (@totalPoints() / @maximumPoints()).toFixed(1)
+      else
+        0
+
     api.solutions.getOfStudent(@id).then (solutions) =>
-      @solutions solutions
+      @solutions solutions.map((s) -> new SolutionViewModel(s))
 
 class ViewModel
   constructor: ->
@@ -34,7 +52,6 @@ class ViewModel
 
   showStudent: (student) ->
     @selectedStudent(student)
-    student.load()
 
   editSolution: (solution) ->
     @config.then (config) =>

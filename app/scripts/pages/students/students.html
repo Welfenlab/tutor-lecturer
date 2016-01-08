@@ -30,7 +30,7 @@
         <td data-bind="text: matrikel"></td>
         <td data-bind="text: name"></td>
         <td data-bind="text: pseudonym"></td>
-        <td>&ndash;</td>
+        <td data-bind="text: totalPoints"></td>
         <td>&ndash;</td>
         <td><div data-bind="click: $parent.showStudent.bind($parent, $data)" class="compact ui icon blue button"><i class="edit icon"></i></div></td>
       </tr>
@@ -46,9 +46,15 @@
   <!-- ko if: studentSelected -->
   <h2 class="ui header">
     <i class="child icon"></i>
-    <div class="content">
-      <span data-bind="text: selectedStudent().name"></span>
-      <em>(<span data-bind="text: selectedStudent().pseudonym"></span>)</em>
+    <div class="content" data-bind="with: selectedStudent">
+      <span data-bind="text: name"></span>
+      <div class="sub header">
+        Pseudonym: <span data-bind="text: pseudonym"></span>
+        &nbsp;&middot;&nbsp;
+        Matrikelnummer: <span data-bind="text: matrikel"></span>
+        &nbsp;&middot;&nbsp;
+        Punkte: <span data-bind="text: totalPoints"></span>/<span data-bind="text: maximumPoints"></span> (<span data-bind="text: pointsPercentage"></span>%)
+      </div>
     </div>
   </h2>
   <p data-bind="visible: selectedStudent().solutions().length == 0">
@@ -57,7 +63,7 @@
   <div class="ui cards" data-bind="foreach: selectedStudent().solutions">
     <div class="ui card">
       <div class="content">
-        <div class="header">Übung 1</div>
+        <div class="header" data-bind="text: title"></div>
         <div class="description">
           <div class="ui header huge important">
             <b>60 </b>
