@@ -26,7 +26,7 @@ class StudentViewModel
     @maximumPoints = ko.computed => _.sum @solutions(), (s) -> s.maximumPoints()
     @pointsPercentage = ko.computed =>
       if @maximumPoints() > 0
-        (@totalPoints() / @maximumPoints()).toFixed(1)
+        (@totalPoints() / @maximumPoints() * 100).toFixed(1)
       else
         0
 
