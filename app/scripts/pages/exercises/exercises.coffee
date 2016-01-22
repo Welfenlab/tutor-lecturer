@@ -26,7 +26,8 @@ class Exercise
         exercise = m2e @source()
         exercise.activationDate = @activationDate()
         exercise.dueDate = @dueDate()
-        exercise.id = @id()
+        if data
+          exercise.id = @id()
         return exercise
 
 class ViewModel
