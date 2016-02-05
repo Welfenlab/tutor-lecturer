@@ -22,7 +22,7 @@ class StudentViewModel
     @pseudonym = data.pseudonym
     @solutions = ko.observable([])
 
-    @totalPoints = ko.computed => _.sum @solutions(), (s) -> s.points
+    @totalPoints = ko.observable data.totalPoints
     @maximumPoints = ko.computed => _.sum @solutions(), (s) -> s.maximumPoints()
     @pointsPercentage = ko.computed =>
       if @maximumPoints() > 0
