@@ -57,6 +57,12 @@ class ViewModel
     @config.then (config) =>
       window.open("#{config.correctorUrl}/#correction/by-solution/#{solution.id}", '_blank')
 
+  regeneratePdf: (solution) ->
+    @config.then (config) =>
+      $.get("#{config.slaveUrl}/pdfs/process/#{solution.id}")
+      .done -> alert 'PDF will be regenerated'
+      .fail -> alert 'Regenerating the PDF failed'
+
 fs = require 'fs'
 module.exports = ->
   ko.components.register __filename.substr(__dirname.length, __filename.length - 7),

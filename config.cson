@@ -30,3 +30,4 @@ session:
 
 # corrector url (for links)
 correctorUrl: "http://localhost:8082"
+slaveUrl: "http://localhost:8084"
