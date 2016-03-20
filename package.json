@@ -18,7 +18,6 @@
     "@tutor/browser-debug-js": "^0.1.0",
     "@tutor/exercise-editor": "^0.1.2",
     "@tutor/javascript-editor-errors": "^0.1.2",
-    "@tutor/login-form": "^0.1.1",
     "@tutor/markdown-editor": "^0.2.0",
     "@tutor/markdown2exercise": "^0.1.11",
     "@tutor/rethinkdb-database": "^0.5.33",
